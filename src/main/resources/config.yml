@@ -1,0 +1,16 @@
+require-tool: true
+valid-tools:
+  - diamond_hoe
+  - minecraft:iron_hoe
+
+harvest-damage:
+  # wheat: 0
+  # carrots: 33
+  minecraft:nether_wart: 2
+  minecraft:cocoa_beans: 2
+harvest-damage-default: 1
+
+replant-damage:
+  minecraft:nether_wart: 1
+  minecraft:cocoa_beans: 1
+replant-damage-default: 1

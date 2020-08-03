@@ -1,0 +1,69 @@
+name: BetterHarvest
+version: ${project.version}
+main: ideias.mano.BetterHarvest.BetterHarvest
+api-version: 1.15
+load: STARTUP
+authors: [MestreProno]
+description: Right click crops to harvest and replant them
+website: https://github.com/brunofauth
+permissions:
+  BetterHarvest.*:
+    description: Grants you all the permissions used by this plugin
+    default: false
+    children:
+      BetterHarvest.harvest.*: true
+      BetterHarves.replant.*: true
+  BetterHarvest.harvest.*:
+    default: false
+    children:
+      BetterHarves.harvest.WHEAT: true
+      BetterHarves.harvest.CARROTS: true
+      BetterHarves.harvest.POTATOES: true
+      BetterHarves.harvest.BEETROOTS: true
+      BetterHarves.harvest.NETHER_WART: true
+      BetterHarves.harvest.COCOA: true
+  BetterHarves.harvest.WHEAT:
+    description: Allows you to harvest wheat by right clicking on it
+    default: false
+  BetterHarves.harvest.CARROTS:
+    description: Allows you to harvest carrots by right clicking on them
+    default: false
+  BetterHarves.harvest.POTATOES:
+    description: Allows you to harvest potatoes by right clicking on them
+    default: false
+  BetterHarves.harvest.BEETROOTS:
+    description: Allows you to harvest beetroots by right clicking on them
+    default: false
+  BetterHarves.harvest.NETHER_WART:
+    description: Allows you to harvest nether wart by right clicking on it
+    default: false
+  BetterHarves.harvest.COCOA:
+    description: Allows you to harvest cocoa beans by right clicking on them
+    default: false
+  BetterHarvest.replant.*:
+    default: false
+    children:
+      BetterHarves.replant.WHEAT: true
+      BetterHarves.replant.CARROTS: true
+      BetterHarves.replant.POTATOES: true
+      BetterHarves.replant.BEETROOTS: true
+      BetterHarves.replant.NETHER_WART: true
+      BetterHarves.replant.COCOA: true
+  BetterHarves.replant.WHEAT:
+    description: Allows you to replant wheat after right-click-harvesting it
+    default: false
+  BetterHarves.replant.CARROTS:
+    description: Allows you to replant carrots after right-click-harvesting them
+    default: false
+  BetterHarves.replant.POTATOES:
+    description: Allows you to replant potatoes after right-click-harvesting them
+    default: false
+  BetterHarves.replant.BEETROOTS:
+    description: Allows you to replant beetroots after right-click-harvesting them
+    default: false
+  BetterHarves.replant.NETHER_WART:
+    description: Allows you to replant nether wart after right-click-harvesting it
+    default: false
+  BetterHarves.replant.COCOA:
+    description: Allows you to replant cocoa beans after right-click-harvesting them
+    default: false
