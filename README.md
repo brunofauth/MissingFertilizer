@@ -23,7 +23,12 @@ With this plugin, you can:
 
 
 ### Compatibility
-This plugin is compatible with Spigot 1.15+
+This plugin is compatible with Spigot 1.15+ (perhaps it is compatible with as old of a version as 1.3, but I really don't feel like testing it. If you want you can change the target version on src/main/resources/plugin.yml before compiling it).
+
+
+
+### Building it
+Import this into IntelliJ idea and press Shift+F10
 
 
 ### What about that name?
