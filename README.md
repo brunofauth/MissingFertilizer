@@ -12,7 +12,7 @@ A spigot plugin which allows you to harvest and replant crops by right clicking 
 
 
 ### Permissions
-This plugin has separate "harvest" and "replant" permissions for each type of crop
+This plugin has separate "harvest" and "replant" permissions for each type of crop. They are all false by default BTW, using a permissions managing plugin, such as LuckPerms, is highly advised.
 
 
 ### Configuration
