@@ -1,6 +1,6 @@
 name: BetterHarvest
 version: ${project.version}
-main: ideias.mano.BetterHarvest.BetterHarvest
+main: ideias.mano.betterHarvest.BetterHarvest
 api-version: 1.15
 load: STARTUP
 authors: [MestreProno]
