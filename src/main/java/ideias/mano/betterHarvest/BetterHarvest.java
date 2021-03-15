@@ -1,4 +1,4 @@
-package ideias.mano.BetterHarvest;
+package ideias.mano.betterHarvest;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,6 +21,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public final class BetterHarvest extends JavaPlugin implements Listener {
 
@@ -83,11 +85,16 @@ public final class BetterHarvest extends JavaPlugin implements Listener {
                     1.0f
                 );
                 if (this.getConfig().getBoolean("require-tool"))
-                    this.damageItem(
-                        event.getItem(),
-                        this.harvestDamage.getOrDefault(
-                            type,
-                            this.getConfig().getInt("harvest-damage-default")
+                    this.setItemInHand(
+                        event.getPlayer(),
+                        event.getHand(),
+                        this.damageItem(
+                            event.getItem(),
+                            this.harvestDamage.getOrDefault(
+                                type,
+                                this.getConfig().getInt("harvest-damage-default")
+                            ),
+                            event.getPlayer()
                         )
                     );
                 BlockFace direction = null;
@@ -104,11 +111,16 @@ public final class BetterHarvest extends JavaPlugin implements Listener {
                     1.0f
                 );
                 if (this.getConfig().getBoolean("require-tool"))
-                    this.damageItem(
-                        event.getItem(),
-                        this.replantDamage.getOrDefault(
-                            type,
-                            this.getConfig().getInt("replant-damage-default")
+                    this.setItemInHand(
+                        event.getPlayer(),
+                        event.getHand(),
+                        this.damageItem(
+                            event.getItem(),
+                            this.replantDamage.getOrDefault(
+                                type,
+                                this.getConfig().getInt("replant-damage-default")
+                            ),
+                            event.getPlayer()
                         )
                     );
                 event.getClickedBlock().setType(type);
@@ -154,12 +166,16 @@ public final class BetterHarvest extends JavaPlugin implements Listener {
         }
     }
 
-    private void damageItem(ItemStack item, int ammount) {
+    private ItemStack damageItem(ItemStack item, int amount, Player player) {
         if (item == null || !(item.getItemMeta() instanceof Damageable))
-            return;
+            return item;
         Damageable dmgMeta = (Damageable) item.getItemMeta();
-        dmgMeta.setDamage(dmgMeta.getDamage() + ammount);
+        dmgMeta.setDamage(dmgMeta.getDamage() + amount);
         item.setItemMeta((ItemMeta) dmgMeta);
+        if (((Damageable) item.getItemMeta()).getDamage() <= item.getType().getMaxDurability())
+            return item;
+        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1f, 1f);
+        return null;
     }
 
     private void loadDamages() {
@@ -219,5 +235,16 @@ public final class BetterHarvest extends JavaPlugin implements Listener {
             if (tool == validTool)
                 return true;
         return false;
+    }
+
+    private void setItemInHand(Player player, EquipmentSlot hand, ItemStack stack) {
+        switch (hand) {
+            case HAND:
+                player.getInventory().setItemInMainHand(stack);
+                break;
+            case OFF_HAND:
+                player.getInventory().setItemInOffHand(stack);
+                break;
+        }
     }
 }
